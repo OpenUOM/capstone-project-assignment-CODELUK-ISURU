@@ -12,7 +12,7 @@ export class StudentTableComponent implements OnInit {
   faTrash = faTrash;
   faPlus = faPlus;
   faPenSquare = faPenSquare;
-  studentData: any;
+  studentData:any;
   selected: any;
 
   constructor(private service : AppServiceService, private router: Router) { }
@@ -56,11 +56,16 @@ export class StudentTableComponent implements OnInit {
     if (value.length <= 0) {
       this.getStudentData();
     } else {
-      let b = this.studentData.filter((student) => {
-        if (student[0].name.toLowerCase().indexOf(value) > -1) {
-          foundItems.push(student)
-        }
-      });
+      this.service.getStudentData().subscribe((response)=>{
+        let studentarry = Object.keys(response).map((key) => [response[key]]);
+        studentarry.filter((student) => {
+          if (student[0].name.toLowerCase().indexOf(value) > -1) {
+            foundItems.push(student)
+          }
+        });
+      },(error)=>{
+        console.log('ERROR - ', error)
+      })
       this.studentData = foundItems;
     }
   }
