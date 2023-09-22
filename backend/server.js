@@ -51,7 +51,7 @@ app.post("/addTeacher", async function (req, res) {
     "Request received to add teacher. Req body: " + JSON.stringify(reqBody)
   );
   let data = await addTeacher(reqBody.id, reqBody.name, reqBody.age);
-
+  console.log(data);
   res.setHeader("Content-Type", "application/json");
   res.end(JSON.stringify(data));
 });
