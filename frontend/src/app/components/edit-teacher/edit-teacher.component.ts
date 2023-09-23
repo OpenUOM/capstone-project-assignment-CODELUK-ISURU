@@ -33,7 +33,6 @@ export class EditTeacherComponent implements OnInit {
   }
 
   editTeacher(values){
-    
     values.id = this.navigation.extras.state.id;
     this.service.editTeacher(values).subscribe((response)=>{
       this.teacherData = response[0];
